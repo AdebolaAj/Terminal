@@ -26,8 +26,6 @@
      display: inline;
      color: rgba(230,167,86,.9);
  }
- element.style {
- }
  
  .intro {
    position: relative;
@@ -288,16 +286,6 @@
    }
  }
  
- @media (min-width: 768px) {
-   .container-md, .container-sm, .container {
-   }
- }
- 
- @media (min-width: 576px) {
-   .container-sm, .container {
-   }
- }
- 
  .container, .container-fluid, .container-xxl, .container-xl, .container-lg, .container-md, .container-sm {
    width: 100%;
    padding-right: var(--bs-gutter-x, 0.75rem);
@@ -312,9 +300,6 @@
  
  .navbar-dark .navbar-brand:hover, .navbar-dark .navbar-brand:focus {
    color: #fff;
- }
- 
- .navbar-dark .navbar-brand {
  }
  
  a:hover {
@@ -339,9 +324,7 @@
    text-decoration: none;
    white-space: nowrap;
  }
- 
- a {
- }
+
  
  .navbar-dark .navbar-toggler {
    color: rgba(255,255,255,.55);
@@ -390,10 +373,6 @@
    margin: 0;
    font-family: inherit;
  }
- 
- button {
- }
- 
  
  
  *, *::before, *::after {
