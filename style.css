@@ -1,4 +1,4 @@
-.nav li{
+ .nav li{
     display: inline;
     padding: 5px;
  }
@@ -383,9 +383,6 @@
    box-sizing: border-box;
  }
  
- *, *::before, *::after {
-   box-sizing: border-box;
- }
  
  body {
    font-family: "Lora";
@@ -407,3 +404,34 @@
    -webkit-text-size-adjust: 100%;
    -webkit-tap-highlight-color: rgba(0,0,0,0);
  }
+
+#features{
+    padding: 7% 10%;
+}
+
+.feature-box{
+    text-align: center;
+    padding: 2%;
+}
+
+.feature-box li{
+    list-style-type: none;
+    margin: 5% 0%;
+}
+
+.price{
+    float: right;
+}
+
+.menu-image{
+  width: 500px;
+  height: 300px;
+  border-radius: 10px;
+}
+
+.menu-images{
+  text-align: center;
+  padding: auto;
+  margin-bottom: 2%;
+}
+
