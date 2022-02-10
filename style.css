@@ -26,7 +26,7 @@
      display: inline;
      color: rgba(230,167,86,.9);
  }
- 
+
  .intro {
    position: relative;
  }
@@ -83,7 +83,11 @@
    margin-top: 5rem;
    margin-bottom: 5rem;
  }
- 
+ .img_size{
+    width: 250px;
+    height: 200px;
+    margin-left: 50px;
+ }
  @media (min-width: 576px) {
    .container-sm, .container {
      max-width: 540px;
