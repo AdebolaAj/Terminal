@@ -1,0 +1,54 @@
+#omlette-location{
+
+  margin:auto;
+  position: relative;
+  top: 25px;
+}
+
+#omlette-toppings{
+
+  position: relative;
+  right: 20px;
+}
+
+#omlette-desc{
+
+  font-style: italic;
+
+}
+
+.first-row{
+
+  position: relative;
+  bottom: 40px;
+}
+
+.second-row{
+
+  position: relative;
+  bottom: 10px;
+}
+
+.first-column{
+
+  position: relative;
+  right: 20px;
+}
+
+.column-1-ingredients{
+
+  position: relative;
+  right: 40px;
+}
+
+
+#bagel-topping-text{
+
+  font-style: italic;
+  line-height: 2ch;
+}
+
+.m-1{
+  
+  margin:auto;
+}
