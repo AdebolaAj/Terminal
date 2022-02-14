@@ -27,8 +27,10 @@
      display: inline;
      color: rgba(230,167,86,.9);
  }
-
-
+    
+ #text{
+    color : white;
+ }
  @media (min-width: 576px) {
    .container-sm, .container {
      max-width: 540px;
