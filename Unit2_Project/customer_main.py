@@ -11,8 +11,8 @@ while running:
         pass
     elif user_input == "2":
         user_code = input("Enter the giftcard code: ")
-        a = Giftcard().redeem(user_code)
-        print(a)
+        redeem_code = Giftcard().redeem(user_code)
+        print(redeem_code)
     elif user_input == "3":
         user_phone_number = input("Enter your phone number: ")
         if user_phone_number.isdigit():
