@@ -7,6 +7,9 @@ class Inventory:
     #     def __init__(self, name, additions, removals):
 
     #         self.name = name
+    #         self.additions = additions
+    #         self.removals = removals 
+
             
     update_track = {}  #dictionary to keep track of which employee updated the inventory and how they updated the inventory
     menu_count = { #dictionary that keeps track of the menu items and their stock count * all lowercase
@@ -59,6 +62,9 @@ class Inventory:
 
     @staticmethod
     def get_section():
+        '''
+        This method takes in no parameters. The method prints all of the sections present in the inventory.
+        '''
         count = 1
         for i in Inventory.menu_count.keys():
             print(str(count) + ". " + i)
@@ -107,6 +113,12 @@ class Inventory:
     @staticmethod
     def get_category(section):
 
+        '''
+        This method takes in one parameter which represents a section in the inventory and prints all the categories present in the section. 
+        This method utilizes the secton_valid method to ensure that the parameter is a valid section in the inventory. 
+        If the section parameter is invalid, a value error is raised.
+        '''
+
         if Inventory.section_valid(section):
             count = 1
             section = section.lower()
@@ -146,6 +158,11 @@ class Inventory:
     @staticmethod
     def get_items(section, category):
 
+        '''
+        This method takes two parameters the first to represent a section in the inventory and the second to represent a category in the inventory
+        Then the items present in the category in the inventory are printed. If the category is invalid a value error is raised.
+        '''
+
         if Inventory.category_valid(section, category):
             count = 1
             section = section.lower()
@@ -154,6 +171,9 @@ class Inventory:
             for i in Inventory.menu_count[section][category].keys():
                 print(str(count) + ". " + i)
                 count += 1
+
+        else:
+            raise ValueError("Category is not a valid category")
 
     @staticmethod
     def overall_item_exists(section, category, item):
