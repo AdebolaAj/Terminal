@@ -67,7 +67,7 @@ class Test_Inventory(unittest.TestCase):
         self.assertEqual(Inventory.get_item_count("beverages", "milkshakes", "chocolate"), 30)
         self.assertEqual(Inventory.get_item_count("savory foods", "omlettes", "diced onions"), 25)
 
-        #Testing update_tracker after add_srock
+        #Testing update_tracker after add_stock
         self.assertEqual(len(Inventory.update_track[self.employee1.full_name]["add"]), 1)
         self.assertEqual(len(Inventory.update_track[self.employee2.full_name]["add"]), 1)
 
