@@ -14,7 +14,7 @@ while running:
         customer1 = Reviews()
         if review_input == "1":
             customerName = input("Enter Name\n> ")
-            customerNumber = input("Enter Number\n >")
+            customerNumber = input("Enter Number\n>")
             customerEmail = input("Enter Email\n> ")
             print("For grades, enter numbers from 1 to 5/n 5 being the highest.")
             customercleaninessGrade = input("Enter cleaniness grade\n> ")
