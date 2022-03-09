@@ -21,14 +21,13 @@ class Test_Inventory(unittest.TestCase):
         self.assertFalse(Inventory.overall_item_exists("snacks", "black coffee", "Hot"))
         self.assertFalse(Inventory.overall_item_exists("beverages", "water", "Cold"))
     
-    def test_get_section(self):
-        pass
-
     def test_get_category(self):
-        pass
+        self.assertRaises(TypeError, Inventory.get_category, 12345)
+        self.assertRaises(TypeError, Inventory.get_category, ["apple"])
 
-    def test_get_item(self):
-        pass
+    def test_get_items(self):
+        self.assertRaises(TypeError, Inventory.get_items, "Sweet foods", 68.9)
+        self.assertRaises(TypeError, Inventory.get_items, ["Sweet foods"], 68.9)
 
     def test_section_valid(self):
         self.assertRaises(TypeError, Inventory.section_valid, 260.0)
