@@ -1,0 +1,30 @@
+.about-us {
+
+    position: relative;
+    bottom: 40px;
+    text-decoration: underline;
+    text-decoration-thickness: 2px; 
+}
+  
+  
+#contact{
+    
+    position: relative;
+    bottom: 20px;
+    float: right;
+}
+  
+  
+  
+#location{
+  
+    position: relative;
+    bottom: 20px;
+    float: left;
+}
+  
+.history{
+  
+    position: relative;
+    bottom: 60px;
+}
