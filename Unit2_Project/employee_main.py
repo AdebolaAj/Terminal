@@ -11,7 +11,7 @@ def verify_item(obj):
 
     while True:
 
-        print("Enter what section you'de like to update an item in:")
+        print("Enter what section you'd like to update an item in:")
         obj.get_section()
         section = input()
 
