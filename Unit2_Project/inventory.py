@@ -53,13 +53,14 @@ class Inventory:
         self.full_name = f_name + " " + l_name
         Inventory.update_track[self.full_name] = {"add": [], "remove": []}
 
-    # @staticmethod
+    @staticmethod
     def get_section():
         count = 1
         for i in Inventory.menu_count.keys():
             print(str(count) + "." + i)
+            count += 1
 
-    
+    @staticmethod
     def section_valid(section):
 
         '''
@@ -77,6 +78,7 @@ class Inventory:
         else:
             return False
 
+    @staticmethod
     def category_valid(section, category):
 
         '''
@@ -98,16 +100,19 @@ class Inventory:
         else:
             return False
 
+    @staticmethod
     def get_category(section):
 
         if Inventory.section_valid(section):
             count = 1
             for i in Inventory.menu_count[section].keys():
                 print(str(count) + "." + i)
+                count += 1
 
         else:
             raise ValueError("Section is not a valid section")
 
+    @staticmethod
     def item_valid(section, category, item):
 
         '''
@@ -133,6 +138,7 @@ class Inventory:
         else:
             return False
 
+    @staticmethod
     def get_items(section, category):
 
         if Inventory.category_valid(section, category):
@@ -140,7 +146,9 @@ class Inventory:
 
             for i in Inventory.menu_count[section][category].keys():
                 print(str(count) + "." + i)
+                count += 1
 
+    @staticmethod
     def overall_item_exists(section, category, item):
 
         '''
@@ -177,6 +185,7 @@ class Inventory:
             return False
       
 
+    @staticmethod
     def get_item_count(section, category, item):
 
         '''
@@ -274,6 +283,7 @@ class Inventory:
 
 
     
+    @staticmethod
     def order_fulfilled(section, category, item, value):
 
         '''

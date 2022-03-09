@@ -59,7 +59,7 @@ def verify_item(obj):
 
 while running:
 
-    action = input("What would you like to do?\nEnter 1 to set today's trivia answer.\nEnter 2 to update the inventory\nEnter 3 to inquire about an item's stock  in the inventory\nEnter 'logout' to logout\n")
+    action = input("What would you like to do?\nEnter 1 to set today's trivia answer.\nEnter 2 to update the inventory\nEnter 3 to inquire about an item's stock in the inventory\nEnter 'logout' to logout\n")
 
     if action == "1":
         new_trivia_answer = input("What is the answer for today's trivia question? ")
@@ -111,10 +111,26 @@ while running:
             print("That is not a valid input")
 
     elif action =="3":
-        pass
+
+        while True:
+            
+                updt_itm = verify_item(employee)
+
+                if updt_itm == None:
+                    continue
+
+                else:
+                    
+                    amount = employee.get_item_count(updt_itm[0], updt_itm[1], updt_itm[2])
+                    print(updt_itm[2] + ": " + str(amount))
+
+                finished = input("Enter 1 to add to another item's inventory or 0 to stop\n")
+
+                if finished == 0:
+                    break
 
     elif action == "logout":
-        pass
+        running = False
     
     else:
         print("That is not a valid input")
