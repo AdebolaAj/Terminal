@@ -5,7 +5,7 @@ customers_attempted = set() #set of phone numbers of customers who have attempte
 running = True
 
 while running:
-    print("Would you like to leave a review(1), redeem a giftcard(2), or try out for a giftcard (3)? Enter 'logout' to logout") #customer accessible operations
+    print("Would you like to leave a review(enter 1), redeem a giftcard(enter 2), or try out for a giftcard (enter 3)? Enter 'logout' to logout") #customer accessible operations
     user_input = input("> ")
 
     if user_input == "1":
@@ -13,22 +13,22 @@ while running:
         review_input = input("> ")
         customer1 = Reviews()
         if review_input == "1":
-            customerName = input("Enter Name/n > ")
-            customerNumber = input("Enter Number/n > ")
-            customerEmail = input("Enter Email/n > ")
+            customerName = input("Enter Name\n> ")
+            customerNumber = input("Enter Number\n> ")
+            customerEmail = input("Enter Email\n> ")
             print("For grades, enter numbers from 1 to 5/n 5 being the highest.")
-            customercleaninessGrade = input("Enter cleaniness grade/n > ")
-            customerserverGrade = input("Enter server grade/n > ")
-            customertreatmentGrade = input("Enter treatment grade/n > ")
+            customercleaninessGrade = input("Enter cleaniness grade\n> ")
+            customerserverGrade = input("Enter server grade\n> ")
+            customertreatmentGrade = input("Enter treatment grade\n> ")
             customer1.general_reviews(customerName, customerNumber, customerEmail, customercleaninessGrade, customerserverGrade, customertreatmentGrade)
         elif review_input == "2":
-            customerName = input("Enter Name/n > ")
-            customerNumber = input("Enter Number/n > ")
-            customerEmail = input("Enter Email/n > ")
+            customerName = input("Enter Name\n> ")
+            customerNumber = input("Enter Number\n> ")
+            customerEmail = input("Enter Email\n> ")
             print("For grades, enter numbers from 1 to 5/n 5 being the highest.")
-            customeritemstasteGrade = input("Enter items taste grade/n > ")
-            customerserviceGrade = input("Enter service grade/n > ")
-            customertitemsSatisfactionGrade = input("Enter items satisfaction grade/n > ")
+            customeritemstasteGrade = input("Enter items taste grade\n> ")
+            customerserviceGrade = input("Enter service grade\n> ")
+            customertitemsSatisfactionGrade = input("Enter items satisfaction grade\n> ")
             customer1.items_review(customerName, customerNumber, customerEmail, customeritemstasteGrade, customerserviceGrade, customertitemsSatisfactionGrade)
         else:
             print("Invalid input!")
