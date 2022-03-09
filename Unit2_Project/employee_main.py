@@ -11,7 +11,7 @@ def verify_item(obj):
 
     while True:
 
-        print("Enter what section you'd like to update an item in:")
+        print("Enter a section: ")
         obj.get_section()
         section = input()
 
@@ -26,7 +26,7 @@ def verify_item(obj):
 
     while True:
 
-        print("Enter what category you'de like to update an item in:")
+        print("Enter a category: ")
         obj.get_category(section)
         category = input()
 
@@ -41,7 +41,7 @@ def verify_item(obj):
 
     while True:
 
-        print("Enter what item you'de like to update an item in:")
+        print("Enter an item: ")
         obj.get_items(section, category)
         item = input()
 
@@ -76,7 +76,7 @@ while running:
                 updt_itm = verify_item(employee)
 
                 if updt_itm == None:
-                    continue
+                    break
 
                 else:
                     
@@ -85,7 +85,7 @@ while running:
 
                 finished = input("Enter 1 to add to another item's inventory or 0 to stop\n")
 
-                if finished == 0:
+                if finished == '0':
                     break
 
         elif update_action == '2':
@@ -95,7 +95,7 @@ while running:
                 updt_itm = verify_item(employee)
 
                 if updt_itm == None:
-                    continue
+                    break
 
                 else:
                     
@@ -104,7 +104,7 @@ while running:
 
                 finished = input("Enter 1 to remove from another item's inventory or 0 to stop\n")
 
-                if finished == 0:
+                if finished == '0':
                     break
 
         else:
@@ -117,16 +117,16 @@ while running:
                 updt_itm = verify_item(employee)
 
                 if updt_itm == None:
-                    continue
+                    break
 
                 else:
                     
                     amount = employee.get_item_count(updt_itm[0], updt_itm[1], updt_itm[2])
                     print(updt_itm[2] + ": " + str(amount))
 
-                finished = input("Enter 1 to add to another item's inventory or 0 to stop\n")
+                finished = input("Enter 1 to inquire about another item's inventory or 0 to stop\n")
 
-                if finished == 0:
+                if finished == '0':
                     break
 
     elif action == "logout":
@@ -134,11 +134,4 @@ while running:
     
     else:
         print("That is not a valid input")
-
-    #add
-    #remove
-    #check
-
-# while running:
-
-
+        

@@ -3,7 +3,11 @@ class Inventory:
     '''
     This class allows employees to manage the inventory of Terminally Latte. The employees can update the inventory by adding or removing stock from the menu list and can also check to see if an order can be fulfilled based on the current inventory. The employees are required to enter their first and last name when accessing the inventory. Every addition and removal of stock in the inventory will be recorded by using the person responsible for the altering of the inventory and the date and time this alteration was made.
     '''
+    # class Update:
+    #     def __init__(self, name, additions, removals):
 
+    #         self.name = name
+            
     update_track = {}  #dictionary to keep track of which employee updated the inventory and how they updated the inventory
     menu_count = { #dictionary that keeps track of the menu items and their stock count * all lowercase
     "beverages": {
@@ -57,7 +61,7 @@ class Inventory:
     def get_section():
         count = 1
         for i in Inventory.menu_count.keys():
-            print(str(count) + "." + i)
+            print(str(count) + ". " + i)
             count += 1
 
     @staticmethod
@@ -105,8 +109,9 @@ class Inventory:
 
         if Inventory.section_valid(section):
             count = 1
+            section = section.lower()
             for i in Inventory.menu_count[section].keys():
-                print(str(count) + "." + i)
+                print(str(count) + ". " + i)
                 count += 1
 
         else:
@@ -143,9 +148,11 @@ class Inventory:
 
         if Inventory.category_valid(section, category):
             count = 1
+            section = section.lower()
+            category = category.lower()            
 
             for i in Inventory.menu_count[section][category].keys():
-                print(str(count) + "." + i)
+                print(str(count) + ". " + i)
                 count += 1
 
     @staticmethod
