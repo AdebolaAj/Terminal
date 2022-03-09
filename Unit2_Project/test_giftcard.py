@@ -23,6 +23,8 @@ class Test_Giftcard(unittest.TestCase):
         Giftcard().redeem(self.giftcard2.gift_code)
         Giftcard().redeem(self.giftcard3.gift_code)
         self.assertEqual(self.giftcard1.redeem_state, True)
+        self.assertEqual(self.giftcard2.redeem_state, False)
+        self.assertEqual(self.giftcard3.redeem_state, True)        
 
     def test_set_trivia_answer(self):
         Giftcard.set_trivia_solution("orange")
