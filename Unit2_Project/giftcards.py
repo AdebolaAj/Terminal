@@ -46,7 +46,8 @@ class Giftcard:
         if code not in Giftcard.generated_giftcards:
             return code
         return  self.generate_code() 
-        
+
+    @classmethod  
     def authenticate(cls, code_to_verify: str) -> bool:
         """
         authenticate: Method that takes in a giftcard code as a string, and returns a boolean, True if the code is valid, and False if the code is invalid.
@@ -63,7 +64,8 @@ class Giftcard:
             if code_to_verify not in cls.generated_giftcards:
                 return False
         return True
-
+    
+    @classmethod
     def redeem(cls, code_to_redeem):
         """
         redeem: Method that takes in a giftcard code as a string, and returns the value of the giftcard if the code is valid, or a error message if otherwise.
@@ -87,6 +89,7 @@ class Giftcard:
         """
         return f'{self.gift_code}, {self.gift_value}, {"Redeemed" if self.redeem_state else "Not redeemed"}'
     
+    @staticmethod
     def set_trivia_solution(new_solution):
         """
         set_trivia_solution: Method that takes in a string that is the new solution for the daily trivia.

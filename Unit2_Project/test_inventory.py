@@ -20,6 +20,14 @@ class Test_Inventory(unittest.TestCase):
         self.assertFalse(Inventory.overall_item_exists("SAVORY foods", "black coffee", "Cold"))
         self.assertFalse(Inventory.overall_item_exists("snacks", "black coffee", "Hot"))
         self.assertFalse(Inventory.overall_item_exists("beverages", "water", "Cold"))
+    
+    def test_get_category(self):
+        self.assertRaises(TypeError, Inventory.get_category, 12345)
+        self.assertRaises(TypeError, Inventory.get_category, ["apple"])
+
+    def test_get_items(self):
+        self.assertRaises(TypeError, Inventory.get_items, "Sweet foods", 68.9)
+        self.assertRaises(TypeError, Inventory.get_items, ["Sweet foods"], 68.9)
 
     def test_section_valid(self):
         self.assertRaises(TypeError, Inventory.section_valid, 260.0)
@@ -62,8 +70,8 @@ class Test_Inventory(unittest.TestCase):
         self.assertRaises(TypeError, self.employee2.add_stock, "sweet foods", 23, "glazed", "4")
         self.assertRaises(ValueError, self.employee1.add_stock, "beverages", "black coffee", "with ice", -5)
 
-        self.employee1.add_stock("beverages", "milkshakes", "chocolate", 30)
-        self.employee2.add_stock("savory foods", "omlettes", "diced onions", 25)
+        self.assertEqual(self.employee1.add_stock("beverages", "milkshakes", "chocolate", 30), "chocolate has been incremented by 30")
+        self.assertEqual(self.employee2.add_stock("savory foods", "omlettes", "diced onions", 25), "diced onions has been incremented by 25")
         self.assertEqual(Inventory.get_item_count("beverages", "milkshakes", "chocolate"), 30)
         self.assertEqual(Inventory.get_item_count("savory foods", "omlettes", "diced onions"), 25)
 
