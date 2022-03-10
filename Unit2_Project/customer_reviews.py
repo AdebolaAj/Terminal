@@ -31,7 +31,7 @@ class Reviews:
             raise TypeError
         if len(phoneNumber) != 10 or not(phoneNumber.isnumeric()):
             raise ValueError
-        if (cleaninessGrade > 1 or cleaninessGrade < 5) or (serverGrade > 1 or serverGrade < 5) or (treatmentGrade > 1 or treatmentGrade < 5):
+        if (cleaninessGrade < 1 or cleaninessGrade > 5) or (serverGrade < 1 or serverGrade > 5) or (treatmentGrade < 1 or treatmentGrade > 5):
             raise ValueError
         else:
             self.general_reviews_dict = {"name": name, "number": phoneNumber, "email": email, "cleaniness grade": cleaninessGrade, "service grade": serverGrade, "treatment grade": treatmentGrade}
@@ -44,7 +44,7 @@ class Reviews:
         review isnt, you return a message.
         """
         for reviews in Reviews.general_reviews_list:
-            if reviews[name] == name:
+            if reviews["name"] == name:
                 return reviews
         return "Customer not found!"
 
@@ -62,7 +62,7 @@ class Reviews:
             raise TypeError
         if len(phoneNumber) != 10 or not(phoneNumber.isnumeric()):
             raise ValueError
-        if (itemstasteGrade > 1 or itemstasteGrade < 5) or (serviceGrade > 1 or serviceGrade < 5) or (itemsSatisfactionGrade > 1 or itemsSatisfactionGrade < 5):
+        if (itemstasteGrade < 1 or itemstasteGrade > 5) or (serviceGrade < 1 or serviceGrade > 5) or (itemsSatisfactionGrade < 1 or itemsSatisfactionGrade > 5):
             raise ValueError
         else:
             self.items_reviews_dict  = {"name": name, "number": phoneNumber, "email": email, "cleaniness grade": itemstasteGrade, "service grade": serviceGrade, "treatment grade": itemsSatisfactionGrade}
@@ -75,6 +75,6 @@ class Reviews:
         review isnt, you return a message.
         """
         for reviews in Reviews.items_reviews_list:
-            if reviews[name] == name:
+            if reviews["name"] == name:
                 return reviews
         return "Customer not found!"
