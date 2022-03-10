@@ -19,7 +19,7 @@ def verify_item(obj):
             break
 
         else:
-            print("That is not a valid section, enter 1 to exit")
+            print("That is not a valid section, enter 1 to exit or just hit enter to try again")
             exit = input()
             if exit == '1':
                 return None
@@ -34,7 +34,7 @@ def verify_item(obj):
             break
 
         else:
-            print("That is not a valid category, enter 1 to exit")
+            print("That is not a valid category, enter 1 to exit or just hit enter to try again")
             exit = input()
             if exit == '1':
                 return None
@@ -49,7 +49,7 @@ def verify_item(obj):
             break
 
         else:
-            print("That is not a valid item, enter 1 to exit")
+            print("That is not a valid item, enter 1 to exit or just hit enter to try again")
             exit = input()
             if exit == '1':
                 return None
