@@ -1,6 +1,11 @@
 from giftcards import *
 from customer_reviews import *
 
+def type_grade(string):
+    if string.isnumeric():
+        return int(string)  
+    return string
+
 customers_attempted = set() #set of phone numbers of customers who have attempted the trivia for the day, return to empty set once employee changes answer for the day
 running = True
 
@@ -16,19 +21,25 @@ while running:
             customerName = input("Enter Name\n> ")
             customerNumber = input("Enter Number\n> ")
             customerEmail = input("Enter Email\n> ")
-            print("For grades, enter numbers from 1 to 5/n 5 being the highest.")
+            print("For grades, enter numbers from 1 to 5\n 5 being the highest.")
             customercleaninessGrade = input("Enter cleaniness grade\n> ")
+            customercleaninessGrade = type_grade(customercleaninessGrade)
             customerserverGrade = input("Enter server grade\n> ")
+            customerserverGrade = type_grade(customerserverGrade)
             customertreatmentGrade = input("Enter treatment grade\n> ")
+            customertreatmentGrade = type_grade(customertreatmentGrade)
             customer1.general_reviews(customerName, customerNumber, customerEmail, customercleaninessGrade, customerserverGrade, customertreatmentGrade)
         elif review_input == "2":
             customerName = input("Enter Name\n> ")
             customerNumber = input("Enter Number\n> ")
             customerEmail = input("Enter Email\n> ")
-            print("For grades, enter numbers from 1 to 5/n 5 being the highest.")
+            print("For grades, enter numbers from 1 to 5\n 5 being the highest.")
             customeritemstasteGrade = input("Enter items taste grade\n> ")
+            customeritemstasteGrade = type_grade(customeritemstasteGrade)
             customerserviceGrade = input("Enter service grade\n> ")
+            customerserviceGrade = type_grade(customerserviceGrade)
             customertitemsSatisfactionGrade = input("Enter items satisfaction grade\n> ")
+            customertitemsSatisfactionGrade = type_grade(customertitemsSatisfactionGrade)
             customer1.items_review(customerName, customerNumber, customerEmail, customeritemstasteGrade, customerserviceGrade, customertitemsSatisfactionGrade)
         else:
             print("Invalid input!")
