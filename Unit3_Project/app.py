@@ -35,7 +35,12 @@ app.config['MONGO_URI'] = "mongodb+srv://admin:"+ os.environ.get('PASSWORD') +"@
 mongo = PyMongo(app)
 
 # Comment out this create_collection method after you run the app for the first time
-# mongo.db.create_collection('library')
+# mongo.db.create_collection('inventory')
+# mongo.db.create_collection('log')
+# mongo.db.create_collection('giftcards')
+# mongo.db.create_collection('general_reviews')
+# mongo.db.create_collection('item_reviews')
+
 
 # -- Routes section --
 # INDEX Route
