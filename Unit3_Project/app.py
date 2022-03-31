@@ -20,6 +20,7 @@ from flask import request, redirect
 from seed_library import seed_books
 from flask_pymongo import PyMongo
 from model import genres
+import os
 
 # -- Initialization section --
 app = Flask(__name__)
@@ -28,7 +29,7 @@ app = Flask(__name__)
 app.config['MONGO_DBNAME'] = 'database'
 
 # URI of database
-app.config['MONGO_URI'] = "<mongo_uri_here>"
+app.config['MONGO_URI'] = "mongodb+srv://admin:"+ os.environ.get('PASSWORD') +"@cluster0.wv93i.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 
 #Initialize PyMongo
 mongo = PyMongo(app)
