@@ -49,5 +49,37 @@ mongo = PyMongo(app)
 def index():
     return render_template('index.html')
 
+# Beverages Route
+@app.route('/beverages')
+def beverages():
+    return render_template('beverages.html')
 
+# Sweet Food Route
+@app.route('/sweet')
+def sweet():
+    return render_template('sweet.html')
 
+# Savory Food Route
+@app.route('/savory')
+def savory():
+    return render_template('savory.html')
+
+# About Route
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+# Reviews Route
+@app.route('/reviews')
+def reviews():
+    pass
+
+# Trivia Route
+@app.route('/trivia')
+def trivia():
+    pass
+
+# Admin Route
+@app.route('/admin/operations')
+def admin():
+    pass
