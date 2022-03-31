@@ -42,12 +42,7 @@ mongo = PyMongo(app)
 @app.route('/')
 @app.route('/index')
 def index():
-    books = []
-    return render_template('index.html', books = books)
+    return render_template('index.html')
 
 
-# NEW BOOK Route
-@app.route('/new')
-def new_book():
-    return render_template('new_book.html', genres = genres)
 
