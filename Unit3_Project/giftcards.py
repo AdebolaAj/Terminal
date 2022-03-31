@@ -19,7 +19,6 @@ class Giftcard:
     """
     with open("trivia_answer.txt", "r", encoding="utf-8") as trivia_answer:
         trivia_solution = trivia_answer.read()
-    # generated_giftcards = {}
     giftcard_values = ["20% off any total order", "1 free beverage and sweet item", "1 free Thursday lunch combo", "Free Sunday brunch combo for 2", "10% off a savory item", "2 items for the price of 1"]
 
     def __init__(self):
