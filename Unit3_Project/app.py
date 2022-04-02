@@ -95,8 +95,8 @@ def trivia():
             reward = create_giftcard() #reward is the giftcard code
         return render_template('giftcard_response.html', code=reward, correct=correct_response)
 
-# Admin Route
-@app.route('/admin/operations')
+# Admin Route, would have links to /insert_question and /redeem_card and inventory management
+@app.route('/admin/operations', methods=['GET', 'POST'])
 def admin():
     pass
 
