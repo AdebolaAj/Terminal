@@ -17,8 +17,6 @@ class Giftcard:
     generated_giftcards: A dictionary with created giftcard_code -> giftcard_object key -> value pairs.
     giftcard_values: A list of strings that are the possible rewards for a giftcard code.
     """
-    with open("trivia_answer.txt", "r", encoding="utf-8") as trivia_answer:
-        trivia_solution = trivia_answer.read()
     giftcard_values = ["20% off any total order", "1 free beverage and sweet item", "1 free Thursday lunch combo", "Free Sunday brunch combo for 2", "10% off a savory item", "2 items for the price of 1"]
 
     def __init__(self):
@@ -100,11 +98,3 @@ class Giftcard:
         """
         return f'{self.gift_code}, {self.gift_value}, {"Redeemed" if self.redeem_state else "Not redeemed"}'
     
-    @staticmethod
-    def set_trivia_solution(new_solution):
-        """
-        set_trivia_solution: Method that takes in a string that is the new solution for the daily trivia.
-        new_solution: A string that is the new solution to the daily trivia.
-        """
-        with open("trivia_answer.txt", "w", encoding="utf-8") as trivia_answer:
-            trivia_answer.write(new_solution)

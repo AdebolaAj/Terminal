@@ -14,9 +14,20 @@
 
 from giftcards import *
 
-def verify_user_answer(user_answer):
-    return user_answer.lower() == Giftcard.trivia_solution.lower()
+client = pymongo.MongoClient("mongodb+srv://admin:"+ os.environ.get('PASSWORD') +"@cluster0.wv93i.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+db = client.myFirstDatabase
 
 def create_giftcard():
     card = Giftcard()
     return card.gift_code
+
+def get_question_answer():
+    triviaDB = db.trivia_questions
+    usable = triviaDB.find_one({"used":False})
+    triviaDB.update_one({"question": usable["question"]}, {"$set": {"used": True}})
+    return usable["answer"]
+
+answer = get_question_answer()
+
+def verify_user_answer(user_answer):
+    return user_answer.lower() == answer.lower()

@@ -12,10 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#list of books for local database
-seed_books = [
-        {"title":"The Fifth Season", "author":"N.K Jemisin", "genre":"fantasy", "publication":2015},
-        {"title":"Annihilation", "author":"Jeff VanderMeer", "genre":"science-fiction", "publication":2014},
-        {"title":"Ancillary Justics", "author":"Ann Leckie", "genre":"science-fiction", "publication":2013},
-        {"title":"Oryx and Crake", "author":"Margaret Atwood", "genre":"speculative-fiction", "publication":2003},
+#list of trivia questions for local database
+seed_questions = [
+        {"question":"What was the first soft drink in space?", "answer":"Coca Cola", "used": False},
+        {"question":"What is the most consumed manufactured drink in the world?", "answer":"Tea", "used": False},
+        {"question":"Which country invented ice cream?", "answer":"China", "used": False},
+        {"question":"Which US state is the only state to grow coffee beans?", "answer":"Hawaii", "used": False},
 ]
