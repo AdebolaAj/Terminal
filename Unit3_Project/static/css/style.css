@@ -540,3 +540,14 @@
   padding: auto;
   margin-bottom: 2%;
 }
+
+#gc_input{
+    height: 50px;
+    border-radius: 5px;
+}
+
+#gc_submit{
+    height: 45px;
+    width: 100px;
+    border-radius: 5px;
+}
