@@ -88,7 +88,7 @@ class Giftcard:
                 return "This giftcard has been previously used"
             else:
                 giftcardsDB.update_one({"giftcode": code_to_redeem}, {"$set": {"redeem_state": True}})                
-                return "Congrats! You win" + str(giftcard_instance['gift_value']) + "!"
+                return str(giftcard_instance['gift_value'])
         else:
             return "This giftcard code is not valid"
 

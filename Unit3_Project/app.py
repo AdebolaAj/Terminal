@@ -19,7 +19,8 @@ from flask import render_template
 from flask import request, redirect
 from seed_library import seed_questions
 from flask_pymongo import PyMongo
-from model import verify_user_answer, create_giftcard, get_question_answer, add_question_answer_pair
+from model import verify_user_answer, create_giftcard
+from model import get_question_answer, add_question_answer_pair, redeem_user_giftcard
 import os
 
 # -- Initialization section --
@@ -109,3 +110,16 @@ def insert_question():
         new_answer = request.form['answer']
         add_question_answer_pair(new_question, new_answer)
         return redirect('/admin/operations')
+
+# Redeem Giftcard Route
+@app.route('/admin/redeem_card', methods=['GET', 'POST'])
+def redeem_user_card():
+    if request.method == 'GET':
+        return render_template('redeem_card.html')
+    else:
+        user_card_code = request.form['giftcode']
+        message = redeem_user_giftcard(user_card_code)
+        correct = True
+        if message in ["This giftcard has been previously used", "This giftcard code is not valid"]:
+            correct = False
+        return render_template('redeem_response.html', message=message, correct=correct)

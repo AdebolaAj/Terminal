@@ -21,6 +21,9 @@ def create_giftcard():
     card = Giftcard()
     return card.gift_code
 
+def redeem_user_giftcard(giftcode):
+    return Giftcard.redeem(giftcode)
+
 def get_question_answer():
     triviaDB = db.trivia_questions
     usable = triviaDB.find_one({"used":False})
