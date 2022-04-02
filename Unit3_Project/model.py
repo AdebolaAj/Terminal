@@ -25,9 +25,16 @@ def get_question_answer():
     triviaDB = db.trivia_questions
     usable = triviaDB.find_one({"used":False})
     triviaDB.update_one({"question": usable["question"]}, {"$set": {"used": True}})
-    return usable["answer"]
+    return usable["question"], usable["answer"]
 
-answer = get_question_answer()
+question, answer = get_question_answer()
 
 def verify_user_answer(user_answer):
     return user_answer.lower() == answer.lower()
+
+def add_question_answer_pair(question, answer):
+    #adds a new trivia question-answer pair to the database collection
+    #admin/operation function
+    triviaDB = db.trivia_questions
+    new_question_answer_pair = {"question": question, "answer": answer, "used": False}
+    triviaDB.insert_one(new_question_answer_pair)

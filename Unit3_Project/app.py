@@ -19,7 +19,7 @@ from flask import render_template
 from flask import request, redirect
 from seed_library import seed_questions
 from flask_pymongo import PyMongo
-from model import verify_user_answer, create_giftcard, get_question_answer
+from model import verify_user_answer, create_giftcard, get_question_answer, add_question_answer_pair
 import os
 
 # -- Initialization section --
@@ -98,3 +98,14 @@ def trivia():
 @app.route('/admin/operations')
 def admin():
     pass
+
+# Add Questions Route
+@app.route('/admin/add_question', methods=['GET', 'POST'])
+def insert_question():
+    if request.method == 'GET':
+        return render_template('add_question.html')
+    else:
+        new_question = request.form['question']
+        new_answer = request.form['answer']
+        add_question_answer_pair(new_question, new_answer)
+        return redirect('/admin/operations')
