@@ -75,9 +75,12 @@ def reviews():
     pass
 
 # Trivia Route
-@app.route('/trivia')
+@app.route('/trivia', methods=['GET', 'POST'])
 def trivia():
-    pass
+    if request.method == 'GET':
+        return render_template('trivia.html')
+    else:
+        pass
 
 # Admin Route
 @app.route('/admin/operations')
