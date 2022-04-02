@@ -12,5 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# master list of genres
-genres = ["comedy","crime","fantasy","romance","science-fiction","speculative-fiction","literature","non-fiction"]
+from giftcards import *
+
+def verify_user_answer(user_answer):
+    return user_answer.lower() == Giftcard.trivia_solution.lower()
+
+def create_giftcard():
+    card = Giftcard()
+    return card.gift_code

@@ -19,7 +19,7 @@ from flask import render_template
 from flask import request, redirect
 from seed_library import seed_books
 from flask_pymongo import PyMongo
-from model import genres
+from model import verify_user_answer, create_giftcard
 import os
 
 # -- Initialization section --
@@ -80,7 +80,12 @@ def trivia():
     if request.method == 'GET':
         return render_template('trivia.html')
     else:
-        pass
+        user_response = request.form['user_answer']
+        correct_response = verify_user_answer(user_response)
+        reward = None
+        if correct_response:
+            reward = create_giftcard() #reward is the giftcard code
+        return render_template('giftcard_response.html', code=reward, correct=correct_response)
 
 # Admin Route
 @app.route('/admin/operations')
