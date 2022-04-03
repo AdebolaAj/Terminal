@@ -22,6 +22,8 @@ class ItemReview:
 
     @classmethod
     def from_form(cls, form):
+        if form == None:
+            raise ValueError("Form data must be provided")
         if not (form['name'].isalpha()):
             raise TypeError("Name not the right format")
         elif form['phoneNumber'] < 0:
@@ -31,6 +33,8 @@ class ItemReview:
     
     @classmethod
     def from_document(cls,document):
+        if document == None:
+            raise ValueError("Document data must be provided")
         return cls(document['name'], document['phoneNumber'], document['email'], document['itemstasteGrade'], document['serviceGrade'], document['itemsSatisfactionGrade'])
 
     def to_document(self):

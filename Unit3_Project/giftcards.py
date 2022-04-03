@@ -3,33 +3,42 @@ import re
 
 
 class Giftcard:
-    """
-    Giftcard class Attributes
-    trivia_solution: A string that is the answer to the trivia of the day for a chance to win a free giftcard code.
-    generated_giftcards: A dictionary with created giftcard_code -> giftcard_object key -> value pairs.
-    giftcard_values: A list of strings that are the possible rewards for a giftcard code.
+    """Giftcard is a class that represents an instance of an actual store giftcard.
+
+    Giftcard objects can be generated, and each instance has three states;
+    -The giftcode
+    -The gift value
+    -The redeem state
+
+    Attributes:
+        gift_code: A string that represents the actual giftcard code that can be redeemed for a value.
+        gift_value: A string that represents the value attached to a particular giftcard code.
+        redeem_state: A boolean indicating whether a giftcard has been used or not.
     """
     giftcard_values = ["20% off any total order", "1 free beverage and sweet item", "1 free Thursday lunch combo", "Free Sunday brunch combo for 2", "10% off a savory item", "2 items for the price of 1"]
 
     def __init__(self, gift_code, gift_value, redeem_state=False):
+        """Constructor for Giftcard object with a gift_code string, a gift_value string, and an optional redeem_state boolean.
+
+        Args:
+            gift_code (str): The giftcode associated with a Giftcard object.
+            gift_value (str): The value associated with a Giftcard object.
+            redeem_state (bool): Indicates whether card has been used or not. Default value False
         """
-        Giftcard Constructor
-        self.gift_code: A string that is the giftcard code that is generated when the Giftcard object is created.
-        self.gift_value: A string that is the value to be received after redeeming a giftcard code.
-        self.redeem_state: A boolean that represents whether a giftcard code has been redeemed or not. True for "redeemed", False for "not redeemed"
-        """
+        if type(gift_code) != str or type(gift_value) != str:
+            raise TypeError('Both giftcode and gift_value have to be strings.')
+        if type(redeem_state) != bool:
+            raise TypeError('redeem_state should be a boolean.')
         self.gift_code = gift_code
         self.gift_value = gift_value
         self.redeem_state = redeem_state 
     
     @staticmethod
     def generate_code() -> str:
-        """
-        generate_code: Method that returns a valid giftcard code as a string that would be assigned to a Giftcard object upon creation.
-        first: A string that is the first of three parts of a valid giftcard code. Composed of alphanumeric characters.
-        second: A string that is the second of three parts of a valid giftcard code. Composed of alphanumeric characters.
-        third: A string that is the third of three parts of a valid giftcard code. Composed of alphanumeric characters.
-        code: A string that is the giftcard card code assigned to a Giftcard object upon creation.
+        """Creates a random giftcard code to be associated with a giftcard object.
+
+        Returns:
+            str: The generated giftcode to be associated with a giftcard object instance.
         """
         uppers = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         lowers = "abcdefghijklmnopqrstuvwxyz"
@@ -44,10 +53,12 @@ class Giftcard:
 
     @staticmethod  
     def authenticate(code_to_verify): 
-        """
-        authenticate: Method that takes in a giftcard code as a string, and returns a boolean, True if the code is valid, and False if the code is invalid.
-        code_to_verify: A string that is the giftcard code to be verified for authenticity.
-        code_matches_pattern: A boolean that represents the validity of a giftcard code. True if the code is valid, and False if the code is invalid.
+        """Determines valadity of a giftcard code by checking if it matches a pre-determined pattern.
+
+        Args:
+            code_to_verify (str): The giftcard code to be authenticated.
+        Returns:
+            bool: The validity of the giftcode.
         """
         if type(code_to_verify) != str:
             raise TypeError("The giftcard code should be a string")
@@ -59,9 +70,10 @@ class Giftcard:
             return True
     
     def redeem(self):
-        """
-        redeem: Method that takes in a giftcard code as a string, and returns the value of the giftcard if the code is valid, or a error message if otherwise.
-        code_to_redeem: A string that is the giftcard code to be redeemed for a value.
+        """Sets the redeem_state of a Giftcard object instace to indicate it has been used.
+
+        Returns:
+            str: The value of a Giftcard object, if it has not been previously used. Else, return None.
         """
         if not self.redeem_state:        
             self.redeem_state = True
@@ -70,19 +82,41 @@ class Giftcard:
             return None
 
     def __str__(self):
-        """
-        String representation method: Returns a string that gives information about the giftcard code, gift value and redeem state of a Giftcard object. For debugging
+        """Represents a Giftcard object instance as a string.
+
+        Returns:
+            str: String representation of a Giftcard object's code, value and redeem state.
         """
         return f'{self.gift_code}, {self.gift_value}, {"Redeemed" if self.redeem_state else "Not redeemed"}'
     
     def to_document(self):
+        """Converts a Giftcard object instance to a dictionary format.
+
+        Returns:
+            dict: A document representation of the Giftcard object instance.
+        """
         return {"giftcode": self.gift_code, "gift_value": self.gift_value, "redeem_state": self.redeem_state}
 
     @staticmethod
     def from_document(document):
+        """Creates a Giftcard object instance from values in a dictionary.
+
+        Args:
+            document (dict): The key-value pairs to be used to create the Giftcard object.
+        Returns:
+            Giftcard: A Giftcard object instance built with the values from document.
+        """
+        if type(document) != dict:
+            raise TypeError('Document should be a dictionary.')
+
         return Giftcard(document["giftcode"], document["gift_value"], document["redeem_state"])
 
     @classmethod
     def create_new(cls):
+        """ Creates a new Giftcard object instance with the class method and class attribute.
+
+        Returns:
+            Giftcard: A Giftcard object instance built with the class method and attribute.
+        """
         return cls(cls.generate_code(), random.choice(cls.giftcard_values))
 
