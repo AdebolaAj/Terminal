@@ -22,7 +22,7 @@ from flask_pymongo import PyMongo
 from model import verify_user_answer, create_giftcard
 from model import get_question_answer, add_question_answer_pair, redeem_user_giftcard
 from model import create_general_review, create_item_review
-from model import addInventory, removeInventory, inquireInventory
+from model import addInventory, removeInventory
 
 import os
 
