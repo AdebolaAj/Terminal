@@ -17,7 +17,7 @@
 from flask import Flask
 from flask import render_template
 from flask import request, redirect
-from seed_library import seed_questions
+from seed_library import seed_questions, seed_inventory
 from flask_pymongo import PyMongo
 from model import verify_user_answer, create_giftcard
 from model import get_question_answer, add_question_answer_pair, redeem_user_giftcard
@@ -48,7 +48,7 @@ mongo = PyMongo(app)
 # Seed Route
 @app.route('/seed')
 def seed():
-    mongo.db.trivia_questions.insert_many(seed_questions)
+    mongo.db.inventory.insert_many(seed_inventory)
     return redirect('/')
 
 # INDEX Route

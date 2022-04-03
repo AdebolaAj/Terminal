@@ -1,4 +1,5 @@
 from datetime import datetime
+import pymongo 
 class Inventory:
     '''
     This class allows employees to manage the inventory of Terminally Latte. The employees can update the inventory by adding or removing stock from the menu list and can also check to see if an order can be fulfilled based on the current inventory. The employees are required to enter their first and last name when accessing the inventory. Every addition and removal of stock in the inventory will be recorded by using the person responsible for the altering of the inventory and the date and time this alteration was made.
