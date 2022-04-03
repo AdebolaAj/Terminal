@@ -87,6 +87,5 @@ class Giftcard:
 
     @classmethod
     def create_new(cls):
-        a = Giftcard(cls.generate_code(), random.choice(cls.giftcard_values))
-        return a
+        return cls(cls.generate_code(), random.choice(cls.giftcard_values))
 
