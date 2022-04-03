@@ -21,12 +21,29 @@ client = pymongo.MongoClient("mongodb+srv://admin:"+ os.environ.get('PASSWORD') 
 db = client.myFirstDatabase
 
 def create_giftcard():
+    """
+    Creates a Giftcard object instance.
+
+    Args:
+        None
+    Returns:
+        card.gift_code (str): The giftcode associated with a Giftcard object.
+    """
     card = Giftcard.create_new()
     giftcardsDB = db.giftcards
     giftcardsDB.insert_one(card.to_document())
     return card.gift_code
 
 def redeem_user_giftcard(giftcode):
+    """
+    Redeems a Giftcard object for its value.
+
+    Args:
+        giftcode (str): The giftcode for the Giftcard object to be redeemed.
+    Returns:
+        value (str): The value associated with a giftcard object.
+        None: No value becuase the code has been previously used.
+    """
     if not Giftcard.authenticate(giftcode):
         return None
     giftcardsDB = db.giftcards
@@ -40,6 +57,15 @@ def redeem_user_giftcard(giftcode):
     return value
 
 def get_question_answer():
+    """
+    Gets a trivia question-answer pair for day from the database.
+
+    Args:
+        None
+    Returns:
+        str: The selected question.
+        str: The answer associated with the selected question.
+    """
     triviaDB = db.trivia_questions
     usable = triviaDB.find_one({"used":False})
     triviaDB.update_one({"question": usable["question"]}, {"$set": {"used": True}})
@@ -48,9 +74,25 @@ def get_question_answer():
 question, answer = get_question_answer()
 
 def verify_user_answer(user_answer):
+    """
+    Checks that a user's answer is the correct answer to the trivia question.
+    Args:
+        user_answer (str): The user's attempt answer to the daily trivia question.
+    Returns:
+        bool: Indicates whether user got the answer right or wrong.
+    """
     return user_answer.lower() == answer.lower()
 
 def add_question_answer_pair(question, answer):
+    """
+    Adds a new question-answer pair to the database.
+
+    Args:
+        question (str): The new question.
+        answer (str): The answer associated with the new question.
+    Returns:
+        None
+    """
     triviaDB = db.trivia_questions
     new_question_answer_pair = {"question": question, "answer": answer, "used": False}
     triviaDB.insert_one(new_question_answer_pair)
