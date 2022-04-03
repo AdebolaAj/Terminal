@@ -86,18 +86,36 @@ def general_reviews():
     if request.method == 'GET':
         return render_template('general_review.html')
     else:
-        new_review = request.form
-        new_review_doc = create_general_review(new_review)
-        return render_template('general_review.html', new_review_doc=new_review_doc)
+        try:            
+            new_review = request.form
+            new_review_doc = create_general_review(new_review)
+            return render_template('index.html')
+
+        except ValueError as err:
+            error_message = str(err)
+            return render_template('general_review.html')
+        
+        except TypeError as err:
+            error_message = str(err)
+            return render_template('general_review.html')            
 
 @app.route('/item_review', methods=['GET', 'POST'])
 def item_reviews():
     if request.method == 'GET':
         return render_template('item_review.html')
     else:
-        new_review = request.form
-        new_review_doc = create_item_review(new_review)
-        return render_template('item_review.html', new_review_doc=new_review_doc)
+        try:            
+            new_review = request.form
+            new_review_doc = create_item_review(new_review)
+            return render_template('index.html')
+
+        except ValueError as err:
+            error_message = str(err)
+            return render_template('item_review.html')
+        
+        except TypeError as err:
+            error_message = str(err)
+            return render_template('item_review.html')  
 
 # Trivia Route
 @app.route('/trivia', methods=['GET', 'POST'])

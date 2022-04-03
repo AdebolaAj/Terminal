@@ -23,10 +23,9 @@ class GeneralReview:
     def from_form(cls, form):
         if form == None:
             raise ValueError("Form data must be provided")
-        if not(form['name'].isalpha()):
+        if not(all(letter.isalpha() or letter.isspace() for letter in form['name'])):
             raise TypeError("Name not the right format")
-
-        elif form['phoneNumber'].isnumeric():
+        elif int(form['phoneNumber']) > 10000000000 or int(form['phoneNumber']) <= 999999999:
             raise ValueError("Number not the right format")
         else:
             return cls(form['name'], form['phoneNumber'], form['email'], form['cleaninessGrade'], form['serverGrade'], form['treatmentGrade'])
