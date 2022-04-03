@@ -1,7 +1,5 @@
 import random
 import re
-import pymongo
-import os
 
 
 class Giftcard:
