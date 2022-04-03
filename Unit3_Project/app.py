@@ -89,15 +89,15 @@ def general_reviews():
         try:            
             new_review = request.form
             new_review_doc = create_general_review(new_review)
-            return render_template('index.html')
+            return redirect('/')
 
         except ValueError as err:
             error_message = str(err)
-            return render_template('general_review.html')
+            return redirect('/general_review')
         
         except TypeError as err:
             error_message = str(err)
-            return render_template('general_review.html')            
+            return redirect('/general_review')            
 
 @app.route('/item_review', methods=['GET', 'POST'])
 def item_reviews():
@@ -107,15 +107,15 @@ def item_reviews():
         try:            
             new_review = request.form
             new_review_doc = create_item_review(new_review)
-            return render_template('index.html')
+            return redirect('/')
 
         except ValueError as err:
             error_message = str(err)
-            return render_template('item_review.html')
+            return redirect('/item_review')
         
         except TypeError as err:
             error_message = str(err)
-            return render_template('item_review.html')  
+            return redirect('/item_review')  
 
 # Trivia Route
 @app.route('/trivia', methods=['GET', 'POST'])
