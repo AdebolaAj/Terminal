@@ -1,14 +1,6 @@
 import random
 import re
-import pymongo
-import os
 
-
-client = pymongo.MongoClient("mongodb+srv://admin:"+ os.environ.get('PASSWORD') +"@cluster0.wv93i.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-db = client.myFirstDatabase
-giftcardsDB = db.giftcards
-
-# giftcards.insert_one({"giftcode": "abcdefg", "gift_value": "free lunch combo", "redeem_state": False})
 
 class Giftcard:
     """
@@ -19,20 +11,19 @@ class Giftcard:
     """
     giftcard_values = ["20% off any total order", "1 free beverage and sweet item", "1 free Thursday lunch combo", "Free Sunday brunch combo for 2", "10% off a savory item", "2 items for the price of 1"]
 
-    def __init__(self):
+    def __init__(self, gift_code, gift_value, redeem_state=False):
         """
         Giftcard Constructor
         self.gift_code: A string that is the giftcard code that is generated when the Giftcard object is created.
         self.gift_value: A string that is the value to be received after redeeming a giftcard code.
         self.redeem_state: A boolean that represents whether a giftcard code has been redeemed or not. True for "redeemed", False for "not redeemed"
         """
-        self.gift_code = self.generate_code()
-        self.gift_value = random.choice(Giftcard.giftcard_values)
-        self.redeem_state = False
-        giftcardsDB.insert_one({"giftcode": self.gift_code, "gift_value": self.gift_value, "redeem_state": self.redeem_state}) 
-        #adding giftcard instance to database collection "giftcards"
+        self.gift_code = gift_code
+        self.gift_value = gift_value
+        self.redeem_state = redeem_state 
     
-    def generate_code(self) -> str:
+    @staticmethod
+    def generate_code() -> str:
         """
         generate_code: Method that returns a valid giftcard code as a string that would be assigned to a Giftcard object upon creation.
         first: A string that is the first of three parts of a valid giftcard code. Composed of alphanumeric characters.
@@ -49,13 +40,10 @@ class Giftcard:
         third = random.choice(digits) + random.choice(uppers) + random.choice(lowers) + random.choice(uppers)
         
         code = f'{first}-{second}-{third}'
-        generated_before = giftcardsDB.find_one({"giftcode":code})
-        if not generated_before:
-            return code
-        return  self.generate_code() 
+        return code
 
     @staticmethod  
-    def authenticate(code_to_verify: str) -> bool:
+    def authenticate(code_to_verify): 
         """
         authenticate: Method that takes in a giftcard code as a string, and returns a boolean, True if the code is valid, and False if the code is invalid.
         code_to_verify: A string that is the giftcard code to be verified for authenticity.
@@ -68,29 +56,18 @@ class Giftcard:
         if not code_matches_pattern:
             return False
         else:
-            generated_before = giftcardsDB.find_one({"giftcode": code_to_verify})
-            if not generated_before:
-                return False
-        return True
+            return True
     
-    @staticmethod
-    def redeem(code_to_redeem):
+    def redeem(self):
         """
         redeem: Method that takes in a giftcard code as a string, and returns the value of the giftcard if the code is valid, or a error message if otherwise.
         code_to_redeem: A string that is the giftcard code to be redeemed for a value.
         """
-        if type(code_to_redeem) != str:
-            raise TypeError("The giftcard code should be a string")
-
-        if Giftcard.authenticate(code_to_redeem):
-            giftcard_instance = giftcardsDB.find_one({"giftcode": code_to_redeem})            
-            if giftcard_instance['redeem_state'] != False:
-                return "This giftcard has been previously used"
-            else:
-                giftcardsDB.update_one({"giftcode": code_to_redeem}, {"$set": {"redeem_state": True}})                
-                return "Congrats! You win" + str(giftcard_instance['gift_value']) + "!"
+        if not self.redeem_state:        
+            self.redeem_state = True
+            return self.gift_value
         else:
-            return "This giftcard code is not valid"
+            return None
 
     def __str__(self):
         """
@@ -98,3 +75,14 @@ class Giftcard:
         """
         return f'{self.gift_code}, {self.gift_value}, {"Redeemed" if self.redeem_state else "Not redeemed"}'
     
+    def to_document(self):
+        return {"giftcode": self.gift_code, "gift_value": self.gift_value, "redeem_state": self.redeem_state}
+
+    @staticmethod
+    def from_document(document):
+        return Giftcard(document["giftcode"], document["gift_value"], document["redeem_state"])
+
+    @classmethod
+    def create_new(cls):
+        return cls(cls.generate_code(), random.choice(cls.giftcard_values))
+

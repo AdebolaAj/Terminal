@@ -17,9 +17,10 @@
 from flask import Flask
 from flask import render_template
 from flask import request, redirect
-from seed_library import seed_questions
+from seed_library import seed_questions, seed_inventory
 from flask_pymongo import PyMongo
-from model import verify_user_answer, create_giftcard, get_question_answer, add_question_answer_pair
+from model import verify_user_answer, create_giftcard
+from model import get_question_answer, add_question_answer_pair, redeem_user_giftcard
 import os
 
 # -- Initialization section --
@@ -47,7 +48,7 @@ mongo = PyMongo(app)
 # Seed Route
 @app.route('/seed')
 def seed():
-    mongo.db.trivia_questions.insert_many(seed_questions)
+    mongo.db.inventory.insert_many(seed_inventory)
     return redirect('/')
 
 # INDEX Route
@@ -105,10 +106,10 @@ def trivia():
             reward = create_giftcard() #reward is the giftcard code
         return render_template('giftcard_response.html', code=reward, correct=correct_response)
 
-# Admin Route
-@app.route('/admin/operations')
+# Admin Route, would have links to /insert_question and /redeem_card and inventory management
+@app.route('/admin/operations', methods=['GET', 'POST'])
 def admin():
-    pass
+    return render_template('admin.html')
 
 # Add Questions Route
 @app.route('/admin/add_question', methods=['GET', 'POST'])
@@ -120,3 +121,23 @@ def insert_question():
         new_answer = request.form['answer']
         add_question_answer_pair(new_question, new_answer)
         return redirect('/admin/operations')
+
+# Redeem Giftcard Route
+@app.route('/admin/redeem_card', methods=['GET', 'POST'])
+def redeem_user_card():
+    if request.method == 'GET':
+        return render_template('redeem_card.html')
+    else:
+        user_card_code = request.form['giftcode']
+        card_state = redeem_user_giftcard(user_card_code) #value is None or the actual gift value
+        correct = True
+        if card_state is None:
+            correct = False
+        return render_template('redeem_response.html', message=card_state, correct=correct)
+
+# Inventory
+@app.route('/admin/inventory', methods=['GET', 'POST'])
+def alter_inventory():
+    pass
+
+

@@ -40,16 +40,14 @@
             <div class="row">
                 <div class="col-xl-9 mx-auto">
                     <div class="text-center cta-inner rounded">
-                        <h2 class="section-heading mb-5"><span class="section-heading-lower">Trivia Attempt</span></h2>
-                        <p>Go the store in-person, order an item, and find today's trivia question on your store receipt.</p>
-                        <!--Include form on this page instead, form for users to attempt winning a giftcard-->
-                        <form method="post" action="/trivia">
-                            <label for="user_answer">Enter your answer here</label>
-                            <input type="text" name="user_answer" placeholder="trivia answer" class="gc_input">
-                            <br><br>
-                            <input type="submit" name="submit" value="Submit" class="gc_submit">                            
-                        </form>
-                        <br>                        
+                        {%if correct%}
+                        <h2 class="section-heading mb-5"><span class="section-heading-lower">SUCCESS!</span></h2>
+                        <p>Customer has won <strong>{{message}}</strong>. Give them a receipt for their prize.</p>
+                        {%else%}
+                        <h2 class="section-heading mb-5"><span class="section-heading-lower">UH OH! :(</span></h2>
+                        <p>This gift card code has either been used or is invalid. Inform customer that their gift code cannot go through.</p>
+                        {%endif%}
+                        <br>
                         <p class="address mb-5"><em><strong>2251 Sherman Ave NW</strong><span><br />Washington, DC</span></em></p>
                         <p class="address mb-0"><small><em>Call Anytime</em></small><span><br />(443) 509-8468</span></p>
                     </div>
