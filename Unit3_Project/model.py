@@ -13,6 +13,7 @@
 # limitations under the License.
 
 from giftcards import *
+import os
 
 client = pymongo.MongoClient("mongodb+srv://admin:"+ os.environ.get('PASSWORD') +"@cluster0.wv93i.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 db = client.myFirstDatabase
