@@ -22,7 +22,7 @@ from flask_pymongo import PyMongo
 from model import verify_user_answer, create_giftcard
 from model import get_question_answer, add_question_answer_pair, redeem_user_giftcard
 from model import create_general_review, create_item_review
-from model import addInventory, removeInventory, inquireInventory
+from model import addInventory, removeInventory
 
 import os
 
@@ -175,13 +175,18 @@ def alter_inventory():
         amount = request.form['amount']
 
         if action == "add":
-            addInventory(section, category, item, amount)
-            print(section, category, amount, item, amount)
+            update_message = f"The new amount for {section} -> {category} -> {item} is {addInventory(section, category, item, amount)}"
+            return render_template('successful_inventory_update.html', message=update_message)
 
         else:
-            removeInventory(section, category, item, amount)
+            try:            
+                update_message = f"The new amount for {section} -> {category} -> {item} is {removeInventory(section, category, item, amount)}"
+                return render_template('successful_inventory_update.html', message=update_message)
 
-        return redirect('/admin/operations')
+            except ValueError as err:
+                error_message = str(err)
+                return render_template('unsuccessful_inventory_update.html', message=error_message)
+
             
 
 

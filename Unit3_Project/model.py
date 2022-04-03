@@ -13,9 +13,9 @@
 # limitations under the License.
 
 from giftcards import *
-from inventory import *
-from generalreview import *
+from inventoryitem import *
 from itemreview import *
+from generalreview import *
 import pymongo
 import os 
 
@@ -88,22 +88,24 @@ def add_question_answer_pair(question, answer):
     new_question_answer_pair = {"question": question, "answer": answer, "used": False}
     triviaDB.insert_one(new_question_answer_pair)
 
-def inquireInventory(section, category, item, amount):
+# def inquireInventory(section, category, item, amount):
 
-    inventory = db.inventory 
-    item_info = inventory.find_one({'section': section, 'category': category, 'item': item})
+#     inventory = db.inventory 
+#     item_info = inventory.find_one({'section': section, 'category': category, 'item': item})
     
-    return item_info['amount']
+#     return item_info['amount']
 
 
 def addInventory(section, category, item, amount):
     amount = int(amount)
     inventory = db.inventory 
     item_info = inventory.find_one({'section': section, 'category': category, 'item': item})
-    item_instance = Inventory.from_document(item_info)
+    item_instance = InventoryItem.from_document(item_info)
     item_instance.AddAmount(amount)
-    inventory.update_one({'section': section, 'category': category, 'item': item }, {'$set': {'amount': item_instance.amount}})
-    return f"The new amount for {section} -> {category} -> {item} is {item_instance.amount}"
+    update = item_instance.to_document()
+    inventory.update_one({"_id": item_info['_id']},  {'$set': {'amount': update['amount']}})
+    # inventory.update_one({'section': update['section'], 'category':update['category'], 'item':update['item']}, {'$set': {'amount': update['amount']}})
+    return item_instance.amount 
 
 
 def removeInventory(section, category, item, amount):
@@ -111,16 +113,13 @@ def removeInventory(section, category, item, amount):
     amount = int(amount)
     inventory = db.inventory 
     item_info = inventory.find_one({'section': section, 'category': category, 'item': item})
-    item_instance = Inventory.from_document(item_info)
-    
-    if item_instance.amount >= amount:
-        item_instance.RemoveAmount(amount)
-        inventory.update_one({'section': section, 'category': category, 'item': item}, {'$set': {'amount': item_instance.amount}})
-        return f"The new amount for {section} -> {category} -> {item} is {item_instance.amount}"        
-
-    else:
-
-        return f"{section} -> {category} -> {item} has less than {amount} in stock"
+    item_instance = InventoryItem.from_document(item_info)
+    item_instance.RemoveAmount(amount)
+    # inventory.update_one(item_instance.to_document())
+    update = item_instance.to_document()
+    inventory.update_one({"_id": item_info['_id']},  {'$set': {'amount': update['amount']}})
+    # inventory.update_one({'section': update['section'], 'category':update['category'], 'item':update['item']}, {'$set': {'amount': update['amount']}})    
+    return item_instance.amount 
 
 def create_general_review(new_review):
     general_reviewsDB = db.general_reviews

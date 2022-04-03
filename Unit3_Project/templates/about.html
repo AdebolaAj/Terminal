@@ -24,16 +24,42 @@
           <a href = "/index">
               <img src="../static/images/Terminally Latté.png" class= "img_size">
             </a>
-          <div class="nav">
-              <ul>
-                  <li><a href="/index">Home</a></li>
-                  <li><a href="/beverages">Beverages</a></li>
-                  <li><a href="/savory">Savory Foods</a></li>
-                  <li><a href="/sweet">Sweet Foods</a></li>
-                  <li><a href="/about">About</a></li>
-                  <li><a href="/trivia">Trivia</a></li>
-              </ul>
-          </div>
+            <div class="nav">
+                <ul>
+                    <li><a href="/index">Home</a></li>
+                    <li><a href="/beverages">Beverages</a></li>
+                    <li><a href="/savory">Savory Foods</a></li>
+                    <li><a href="/sweet">Sweet Foods</a></li>
+                    <li class="nav-item dropdown">
+                      <div class="dropdown">
+                          <button onclick="myFunction()" class="dropbtn">Other</button>
+                          <div id="myDropdown" class="dropdown-content">
+                            <a href="/trivia">Trivia</a>
+                            <a href="/general_review">General Review</a>
+                            <a href="/item_review">Item Review</a>
+                          </div>
+                        </div>
+                    <li><a href="/about">About</a></li>
+                        <script>
+                          function myFunction() {
+                            document.getElementById("myDropdown").classList.toggle("show");
+                          }
+                          window.onclick = function(event) {
+                            if (!event.target.matches('.dropbtn')) {
+                              var dropdowns = document.getElementsByClassName("dropdown-content");
+                              var i;
+                              for (i = 0; i < dropdowns.length; i++) {
+                                var openDropdown = dropdowns[i];
+                                if (openDropdown.classList.contains('show')) {
+                                  openDropdown.classList.remove('show');
+                                }
+                              }
+                            }
+                          }
+                          </script>
+                  </li>
+                </ul>
+            </div>
   </div>
     <section class="page-section cta">
         <div class="container">
