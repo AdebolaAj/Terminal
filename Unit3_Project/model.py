@@ -23,13 +23,15 @@ def create_giftcard():
     giftcardsDB.insert_one(card.to_document())
     return card.gift_code
 
-def redeem_user_giftcard(giftcode):#modify
+def redeem_user_giftcard(giftcode):
     if not Giftcard.authenticate(giftcode):
         return None
     giftcardsDB = db.giftcards
     card_doc = giftcardsDB.find_one({"giftcode": giftcode})
+    if not card_doc:
+        return None
     giftcard_obj = Giftcard.from_document(card_doc)    
-    value = giftcard_obj.redeem() #value is none or the actual gift value
+    value = giftcard_obj.redeem() 
     update = giftcard_obj.to_document()
     giftcardsDB.update_one({"giftcode": update["giftcode"]}, {"$set": {"redeem_state": update["redeem_state"]}})
     return value
@@ -46,8 +48,6 @@ def verify_user_answer(user_answer):
     return user_answer.lower() == answer.lower()
 
 def add_question_answer_pair(question, answer):
-    #adds a new trivia question-answer pair to the database collection
-    #admin/operation function
     triviaDB = db.trivia_questions
     new_question_answer_pair = {"question": question, "answer": answer, "used": False}
     triviaDB.insert_one(new_question_answer_pair)
