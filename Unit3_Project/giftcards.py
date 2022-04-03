@@ -78,7 +78,6 @@ class Giftcard:
         return f'{self.gift_code}, {self.gift_value}, {"Redeemed" if self.redeem_state else "Not redeemed"}'
     
     def to_document(self):
-        #update if instance exists in db, else insert, hendle in model.py/app.py
         return {"giftcode": self.gift_code, "gift_value": self.gift_value, "redeem_state": self.redeem_state}
 
     @staticmethod
@@ -87,6 +86,5 @@ class Giftcard:
 
     @classmethod
     def create_new(cls):
-        a = Giftcard(cls.generate_code(), random.choice(cls.giftcard_values))
-        return a
+        return cls(cls.generate_code(), random.choice(cls.giftcard_values))
 
