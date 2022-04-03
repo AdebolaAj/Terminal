@@ -21,6 +21,7 @@ from seed_library import seed_questions, seed_inventory
 from flask_pymongo import PyMongo
 from model import verify_user_answer, create_giftcard
 from model import get_question_answer, add_question_answer_pair, redeem_user_giftcard
+from model import addInventory, removeInventory, inquireInventory
 import os
 
 # -- Initialization section --
@@ -127,6 +128,27 @@ def redeem_user_card():
 # Inventory
 @app.route('/admin/inventory', methods=['GET', 'POST'])
 def alter_inventory():
-    pass
+    
+    if request.method == 'GET':
+        return render_template('inventory.html')
+
+    else:
+
+        section = request.form['section']
+        category = request.form['category']
+        item = request.form['item']
+        action = request.form['action']
+        amount = request.form['amount']
+
+        if action == "add":
+            addInventory(section, category, item, amount)
+            print(section, category, amount, item, amount)
+
+        else:
+            removeInventory(section, category, item, amount)
+
+        return redirect('/admin/operations')
+            
+
 
 

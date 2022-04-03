@@ -64,7 +64,7 @@ def inquireInventory(section, category, item, amount):
 
 
 def addInventory(section, category, item, amount):
-
+    amount = int(amount)
     inventory = db.inventory 
     item_info = inventory.find_one({'section': section, 'category': category, 'item': item})
     item_instance = Inventory.from_document(item_info)
@@ -75,6 +75,7 @@ def addInventory(section, category, item, amount):
 
 def removeInventory(section, category, item, amount):
 
+    amount = int(amount)
     inventory = db.inventory 
     item_info = inventory.find_one({'section': section, 'category': category, 'item': item})
     item_instance = Inventory.from_document(item_info)
