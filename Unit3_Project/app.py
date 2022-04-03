@@ -79,10 +79,21 @@ def about():
     return render_template('about.html')
 
 # Reviews Route
-@app.route('/reviews')
-def reviews():
+@app.route('/general_reviews', methods=['GET', 'POST'])
+def general_reviews():
+    if request.method == 'GET':
+        return render_template('general_review.html')
+    else:
+        general_reviews_dict = {"Name": request.form['name'], "Phone Number": request.form['phoneNumber'], "email": request.form['email'], "Cleaniness Grade": request.form['cleaninessGrade'], "Server Grade": request.form["serverGrade"], "Treatment Grade": request.form["treatmentGrade"]}
     pass
 
+@app.route('/item_reviews', methods=['GET', 'POST'])
+def item_reviews():
+    if request.method == 'GET':
+        return render_template('general_review.html')
+    else:
+        item_reviews_dict = {"Name": request.form['name'], "Phone Number": request.form['phoneNumber'], "email": request.form['email'], "Cleaniness Grade": request.form['itemstasteGrade'], "Service Grade": request.form["serviceGrade"], "Items Satisfaction Grade": request.form["itemsSatisfactionGrade"]}
+    pass
 # Trivia Route
 @app.route('/trivia', methods=['GET', 'POST'])
 def trivia():

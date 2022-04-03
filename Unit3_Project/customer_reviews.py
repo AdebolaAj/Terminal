@@ -1,3 +1,10 @@
+import pymongo
+import os
+
+client = pymongo.MongoClient("mongodb+srv://admin:"+ os.environ.get('PASSWORD') +"@cluster0.wv93i.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+db = client.myFirstDatabase
+general_reviewsDB = db.general_reviews
+
 class Reviews:
     """
     Reviews class Attributes:
