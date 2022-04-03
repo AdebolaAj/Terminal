@@ -98,7 +98,7 @@ def trivia():
 # Admin Route, would have links to /insert_question and /redeem_card and inventory management
 @app.route('/admin/operations', methods=['GET', 'POST'])
 def admin():
-    pass
+    return render_template('admin.html')
 
 # Add Questions Route
 @app.route('/admin/add_question', methods=['GET', 'POST'])
@@ -123,3 +123,10 @@ def redeem_user_card():
         if card_state is None:
             correct = False
         return render_template('redeem_response.html', message=card_state, correct=correct)
+
+# Inventory
+@app.route('/admin/inventory', methods=['GET', 'POST'])
+def alter_inventory():
+    pass
+
+

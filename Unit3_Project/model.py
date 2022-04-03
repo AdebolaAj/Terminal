@@ -13,6 +13,9 @@
 # limitations under the License.
 
 from giftcards import *
+from inventory import *
+import pymongo
+import os 
 
 client = pymongo.MongoClient("mongodb+srv://admin:"+ os.environ.get('PASSWORD') +"@cluster0.wv93i.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 db = client.myFirstDatabase
@@ -51,3 +54,36 @@ def add_question_answer_pair(question, answer):
     triviaDB = db.trivia_questions
     new_question_answer_pair = {"question": question, "answer": answer, "used": False}
     triviaDB.insert_one(new_question_answer_pair)
+
+def inquireInventory(section, category, item, amount):
+
+    inventory = db.inventory 
+    item_info = inventory.find_one({'section': section, 'category': category, 'item': item})
+    
+    return item_info['amount']
+
+
+def addInventory(section, category, item, amount):
+
+    inventory = db.inventory 
+    item_info = inventory.find_one({'section': section, 'category': category, 'item': item})
+    item_instance = Inventory.from_document(item_info)
+    item_instance.AddAmount(amount)
+    inventory.update_one({'section': section, 'category': category, 'item': item }, {'$set': {'amount': item_instance.amount}})
+    return f"The new amount for {section} -> {category} -> {item} is {item_instance.amount}"
+
+
+def removeInventory(section, category, item, amount):
+
+    inventory = db.inventory 
+    item_info = inventory.find_one({'section': section, 'category': category, 'item': item})
+    item_instance = Inventory.from_document(item_info)
+    
+    if item_instance.amount >= amount:
+        item_instance.RemoveAmount(amount)
+        inventory.update_one({'section': section, 'category': category, 'item': item}, {'$set': {'amount': item_instance.amount}})
+        return f"The new amount for {section} -> {category} -> {item} is {item_instance.amount}"        
+
+    else:
+
+        return f"{section} -> {category} -> {item} has less than {amount} in stock"
