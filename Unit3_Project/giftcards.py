@@ -28,6 +28,10 @@ class Giftcard:
             gift_value (str): The value associated with a Giftcard object.
             redeem_state (bool): Indicates whether card has been used or not. Default value False
         """
+        if type(gift_code) != str or type(gift_value) != str:
+            raise TypeError('Both giftcode and gift_value have to be strings.')
+        if type(redeem_state) != bool:
+            raise TypeError('redeem_state should be a boolean.')
         self.gift_code = gift_code
         self.gift_value = gift_value
         self.redeem_state = redeem_state 
@@ -120,6 +124,9 @@ class Giftcard:
         Returns:
             Giftcard: A Giftcard object instance built with the values from document.
         """
+        if type(document) != dict:
+            raise TypeError('Document should be a dictionary.')
+
         return Giftcard(document["giftcode"], document["gift_value"], document["redeem_state"])
 
     @classmethod
