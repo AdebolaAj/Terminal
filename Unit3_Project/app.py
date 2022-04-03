@@ -118,8 +118,8 @@ def redeem_user_card():
         return render_template('redeem_card.html')
     else:
         user_card_code = request.form['giftcode']
-        message = redeem_user_giftcard(user_card_code)
+        card_state = redeem_user_giftcard(user_card_code) #value is None or the actual gift value
         correct = True
-        if message in ["This giftcard has been previously used", "This giftcard code is not valid"]:
+        if card_state is None:
             correct = False
-        return render_template('redeem_response.html', message=message, correct=correct)
+        return render_template('redeem_response.html', message=card_state, correct=correct)
