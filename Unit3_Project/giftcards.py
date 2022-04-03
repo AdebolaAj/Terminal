@@ -3,8 +3,7 @@ import re
 
 
 class Giftcard:
-    """
-    Giftcard is a class that represents an instance of an actual store giftcard.
+    """Giftcard is a class that represents an instance of an actual store giftcard.
 
     Giftcard objects can be generated, and each instance has three states;
     -The giftcode
@@ -19,11 +18,9 @@ class Giftcard:
     giftcard_values = ["20% off any total order", "1 free beverage and sweet item", "1 free Thursday lunch combo", "Free Sunday brunch combo for 2", "10% off a savory item", "2 items for the price of 1"]
 
     def __init__(self, gift_code, gift_value, redeem_state=False):
-        """
-        Constructor for Giftcard object with a gift_code string, a gift_value string, and an optional redeem_state boolean.
+        """Constructor for Giftcard object with a gift_code string, a gift_value string, and an optional redeem_state boolean.
 
         Args:
-            self: Object instance.
             gift_code (str): The giftcode associated with a Giftcard object.
             gift_value (str): The value associated with a Giftcard object.
             redeem_state (bool): Indicates whether card has been used or not. Default value False
@@ -38,13 +35,10 @@ class Giftcard:
     
     @staticmethod
     def generate_code() -> str:
-        """
-        Creates a random giftcard code to be associated with a giftcard object.
+        """Creates a random giftcard code to be associated with a giftcard object.
 
-        Args:
-            None
         Returns:
-            code (str): The generated giftcode to be associated with a giftcard object instance.
+            str: The generated giftcode to be associated with a giftcard object instance.
         """
         uppers = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         lowers = "abcdefghijklmnopqrstuvwxyz"
@@ -59,8 +53,7 @@ class Giftcard:
 
     @staticmethod  
     def authenticate(code_to_verify): 
-        """
-        Determines valadity of a giftcard code by checking if it matches a pre-determined pattern.
+        """Determines valadity of a giftcard code by checking if it matches a pre-determined pattern.
 
         Args:
             code_to_verify (str): The giftcard code to be authenticated.
@@ -77,14 +70,10 @@ class Giftcard:
             return True
     
     def redeem(self):
-        """
-        Sets the redeem_state of a Giftcard object instace to indicate it has been used.
+        """Sets the redeem_state of a Giftcard object instace to indicate it has been used.
 
-        Args:
-            self: Object instance.
         Returns:
-            gift_value (str): The value of a Giftcard object, if it has not been previously used.
-            None: No value becuase the giftcard has been previously redeemed.
+            str: The value of a Giftcard object, if it has not been previously used. Else, return None.
         """
         if not self.redeem_state:        
             self.redeem_state = True
@@ -93,31 +82,24 @@ class Giftcard:
             return None
 
     def __str__(self):
-        """
-        Represents a Giftcard object instance as a string.
+        """Represents a Giftcard object instance as a string.
 
-        Args:
-            self: Object instance.
         Returns:
-            str: Contains details about a Giftcard object's code, value and redeem state.
+            str: String representation of a Giftcard object's code, value and redeem state.
         """
         return f'{self.gift_code}, {self.gift_value}, {"Redeemed" if self.redeem_state else "Not redeemed"}'
     
     def to_document(self):
-        """
-        Converts a Giftcard object instance to a dictionary format.
+        """Converts a Giftcard object instance to a dictionary format.
 
-        Args:
-            self: Object instance.
         Returns:
-            dict: A dictionary representation of the Giftcard object instance.
+            dict: A document representation of the Giftcard object instance.
         """
         return {"giftcode": self.gift_code, "gift_value": self.gift_value, "redeem_state": self.redeem_state}
 
     @staticmethod
     def from_document(document):
-        """
-        Creates a Giftcard object instance from values in a dictionary.
+        """Creates a Giftcard object instance from values in a dictionary.
 
         Args:
             document (dict): The key-value pairs to be used to create the Giftcard object.
@@ -131,11 +113,8 @@ class Giftcard:
 
     @classmethod
     def create_new(cls):
-        """
-        Creates a new Giftcard object instance with the class method and class attribute.
+        """ Creates a new Giftcard object instance with the class method and class attribute.
 
-        Args:
-            cls: Object class.
         Returns:
             Giftcard: A Giftcard object instance built with the class method and attribute.
         """
