@@ -110,9 +110,38 @@ def removeInventory(section, category, item, amount):
     amount = int(amount)
     inventory = db.inventory 
     item_info = inventory.find_one({'section': section, 'category': category, 'item': item})
+<<<<<<< HEAD
     item_instance = InventoryItem.from_document(item_info)
     item_instance.RemoveAmount(amount)
     # inventory.update_one(item_instance.to_document())
     update = item_instance.to_document()
     inventory.update_one({'section': update['section'], 'category':update['category'], 'item':update['item']}, {'$set': {'amount': update['amount']}})    
     return item_instance.amount 
+=======
+    item_instance = Inventory.from_document(item_info)
+    
+    if item_instance.amount >= amount:
+        item_instance.RemoveAmount(amount)
+        inventory.update_one({'section': section, 'category': category, 'item': item}, {'$set': {'amount': item_instance.amount}})
+        return f"The new amount for {section} -> {category} -> {item} is {item_instance.amount}"        
+
+    else:
+
+        return f"{section} -> {category} -> {item} has less than {amount} in stock"
+
+def create_general_review(new_review):
+    general_reviewsDB = db.general_reviews
+    new_review = GeneralReview.from_form(new_review)
+    new_review_doc = new_review.to_document()
+    general_reviewsDB.insert_one(new_review_doc)
+    return new_review_doc
+
+
+def create_item_review(new_review):
+    item_reviewsDB = db.item_reviews
+    new_review = ItemReview.from_form(new_review)
+    new_review_doc = new_review.to_document()
+    item_reviewsDB.insert_one(new_review_doc)
+    return new_review_doc
+    
+>>>>>>> 5b49e7aa29c698af048be6121ed7e364b5188013
