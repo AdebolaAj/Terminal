@@ -14,6 +14,8 @@
 
 from giftcards import *
 from inventory import *
+from generalreview import *
+from itemreview import *
 import pymongo
 import os 
 
@@ -87,3 +89,19 @@ def removeInventory(section, category, item, amount):
     else:
 
         return f"{section} -> {category} -> {item} has less than {amount} in stock"
+
+def create_general_review(new_review):
+    general_reviewsDB = db.general_reviews
+    new_review = GeneralReview.from_form(new_review)
+    new_review_doc = new_review.to_document()
+    general_reviewsDB.insert_one(new_review_doc)
+    return new_review_doc
+
+
+def create_item_review(new_review):
+    item_reviewsDB = db.item_reviews
+    new_review = ItemReview.from_form(new_review)
+    new_review_doc = new_review.to_document()
+    item_reviewsDB.insert_one(new_review_doc)
+    return new_review_doc
+    
