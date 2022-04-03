@@ -81,7 +81,7 @@ def about():
     return render_template('about.html')
 
 # Reviews Route
-@app.route('/general_reviews', methods=['GET', 'POST'])
+@app.route('/general_review', methods=['GET', 'POST'])
 def general_reviews():
     if request.method == 'GET':
         return render_template('general_review.html')
@@ -90,7 +90,7 @@ def general_reviews():
         new_review_doc = create_general_review(new_review)
         return render_template('general_review.html', new_review_doc=new_review_doc)
 
-@app.route('/item_reviews', methods=['GET', 'POST'])
+@app.route('/item_review', methods=['GET', 'POST'])
 def item_reviews():
     if request.method == 'GET':
         return render_template('item_review.html')

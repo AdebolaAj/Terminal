@@ -26,7 +26,7 @@ class ItemReview:
             raise ValueError("Form data must be provided")
         if not (form['name'].isalpha()):
             raise TypeError("Name not the right format")
-        elif form['phoneNumber'] < 0:
+        elif form['phoneNumber'].isnumeric():
             raise ValueError("Number not the right format")
         else:
             return cls(form['name'], form['phoneNumber'], form['email'], form['itemstasteGrade'], form['serviceGrade'], form['itemsSatisfactionGrade'])

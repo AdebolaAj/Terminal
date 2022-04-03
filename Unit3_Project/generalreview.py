@@ -21,15 +21,20 @@ class GeneralReview:
     
     @classmethod
     def from_form(cls, form):
-        if form['name'].isalpha():
+        if form == None:
+            raise ValueError("Form data must be provided")
+        if not(form['name'].isalpha()):
             raise TypeError("Name not the right format")
-        elif form['phoneNumber'] < 0:
+
+        elif form['phoneNumber'].isnumeric():
             raise ValueError("Number not the right format")
         else:
             return cls(form['name'], form['phoneNumber'], form['email'], form['cleaninessGrade'], form['serverGrade'], form['treatmentGrade'])
     
     @classmethod
     def from_document(cls,document):
+        if document == None:
+            raise ValueError("Form data must be provided")
         return cls(document['name'], document['phoneNumber'], document['email'], document['cleaninessGrade'], document['serverGrade'], document['treatmentGrade'])
 
     def to_document(self):
