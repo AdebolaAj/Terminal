@@ -103,7 +103,8 @@ def addInventory(section, category, item, amount):
     item_instance = InventoryItem.from_document(item_info)
     item_instance.AddAmount(amount)
     update = item_instance.to_document()
-    inventory.update_one({'section': update['section'], 'category':update['category'], 'item':update['item']}, {'$set': {'amount': update['amount']}})
+    inventory.update_one({"_id": item_info['_id']},  {'$set': {'amount': update['amount']}})
+    # inventory.update_one({'section': update['section'], 'category':update['category'], 'item':update['item']}, {'$set': {'amount': update['amount']}})
     return item_instance.amount 
 
 
@@ -116,7 +117,8 @@ def removeInventory(section, category, item, amount):
     item_instance.RemoveAmount(amount)
     # inventory.update_one(item_instance.to_document())
     update = item_instance.to_document()
-    inventory.update_one({'section': update['section'], 'category':update['category'], 'item':update['item']}, {'$set': {'amount': update['amount']}})    
+    inventory.update_one({"_id": item_info['_id']},  {'$set': {'amount': update['amount']}})
+    # inventory.update_one({'section': update['section'], 'category':update['category'], 'item':update['item']}, {'$set': {'amount': update['amount']}})    
     return item_instance.amount 
 
 def create_general_review(new_review):
