@@ -56,4 +56,24 @@ class InventoryItem:
 
     @classmethod
     def from_document(cls, document):
+
+        if type(document) != dict:
+            raise TypeError("The document must be a dictionary")
+        
+        keys = []
+        for key in document.keys():
+            if type(key) == str and key.isalpha():
+                keys.append(key.lower())
+            else:
+                keys.append(key)
+
+        if 'section' not in keys:
+            raise KeyError("The key 'section' does not exist in the document")
+        if 'category' not in keys:
+            raise KeyError("The key 'category' does not exist in the document")
+        if 'item' not in keys:
+            raise KeyError("The key 'item' does not exist in the document")
+        if 'amount' not in keys:
+            raise KeyError("The key 'amount' does not exist in the document")
+
         return InventoryItem(document['section'], document['category'], document['item'], document['amount'])
