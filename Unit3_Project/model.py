@@ -88,15 +88,19 @@ def add_question_answer_pair(question, answer):
     new_question_answer_pair = {"question": question, "answer": answer, "used": False}
     triviaDB.insert_one(new_question_answer_pair)
 
-# def inquireInventory(section, category, item, amount):
-
-#     inventory = db.inventory 
-#     item_info = inventory.find_one({'section': section, 'category': category, 'item': item})
-    
-#     return item_info['amount']
-
-
 def addInventory(section, category, item, amount):
+
+    '''Adds to the amount of an item in the inventory
+
+    Args:
+        section(string): the section of the item in the inventory (the first layer)
+        category(string): the category of the item in the inventory  (the second layer)
+        item(string): the actual name of the item (the third layer)
+        amount(integer): the amount to be added to the item's amount in the inventory
+
+    Returns:
+        The new amount of the item in the inventory
+    '''
     amount = int(amount)
     inventory = db.inventory 
     item_info = inventory.find_one({'section': section, 'category': category, 'item': item})
@@ -107,8 +111,19 @@ def addInventory(section, category, item, amount):
     # inventory.update_one({'section': update['section'], 'category':update['category'], 'item':update['item']}, {'$set': {'amount': update['amount']}})
     return item_instance.amount 
 
-
 def removeInventory(section, category, item, amount):
+
+    '''Removes a specified amount from an item's amount in the inventory
+
+    Args:
+        section(string): the section of the item in the inventory (the first layer)
+        category(string): the category of the item in the inventory  (the second layer)
+        item(string): the actual name of the item (the third layer)
+        amount(integer): the amount to be removed from the item's amount in the inventory
+
+    Returns:
+        The new amount of the item in the inventory
+    '''
 
     amount = int(amount)
     inventory = db.inventory 
